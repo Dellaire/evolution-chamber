@@ -46,8 +46,8 @@ public class EvolutionProcessor {
         population.addIndividuals(newIndividuals);
 
         Map<Individual, Double> currentlyBestIndividuals = population.getBestIndividualsWithFitness(1);
-        LOGGER.info("Best individual: " + currentlyBestIndividuals.keySet().stream().findFirst() + ", "
-                + "Fitness: " + currentlyBestIndividuals.values().stream().findFirst());
+        LOGGER.debug("Best individual: " + currentlyBestIndividuals.keySet().stream().findFirst().get() + ", "
+                + "Fitness: " + currentlyBestIndividuals.values().stream().findFirst().get());
 
         return population.removeWorstIndividuals(this.evolutionChamberProperties.getSelectionSize());
     }
