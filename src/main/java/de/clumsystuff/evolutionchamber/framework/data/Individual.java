@@ -1,4 +1,4 @@
-package de.clumsystuff.evolutionchamber.data;
+package de.clumsystuff.evolutionchamber.framework.data;
 
 public interface Individual {
 

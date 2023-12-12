@@ -1,4 +1,4 @@
-package de.clumsystuff.evolutionchamber.configuration;
+package de.clumsystuff.evolutionchamber.framework.configuration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

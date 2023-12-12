@@ -1,7 +1,7 @@
-package de.clumsystuff.evolutionchamber.demo.persistence;
+package de.clumsystuff.evolutionchamber.evolutions.picalculation;
 
-import de.clumsystuff.evolutionchamber.data.FitnessFunction;
-import de.clumsystuff.evolutionchamber.data.Individual;
+import de.clumsystuff.evolutionchamber.framework.data.FitnessFunction;
+import de.clumsystuff.evolutionchamber.framework.data.Individual;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;

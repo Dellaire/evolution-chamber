@@ -1,8 +1,8 @@
-package de.clumsystuff.evolutionchamber.processing;
+package de.clumsystuff.evolutionchamber.framework.processing;
 
-import de.clumsystuff.evolutionchamber.configuration.EvolutionChamberProperties;
-import de.clumsystuff.evolutionchamber.data.Individual;
-import de.clumsystuff.evolutionchamber.data.Population;
+import de.clumsystuff.evolutionchamber.framework.configuration.EvolutionChamberProperties;
+import de.clumsystuff.evolutionchamber.framework.data.Individual;
+import de.clumsystuff.evolutionchamber.framework.data.Population;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class EvolutionProcessor {
         this.evolutionChamberProperties = evolutionChamberProperties;
     }
 
-    Population createGenerations(Population population) {
+    public Population createGenerations(Population population) {
 
         Population latestPopulation = population;
         for (int i = 0; i < this.evolutionChamberProperties.getNumberOfGenerations(); i++) {
@@ -33,7 +33,7 @@ public class EvolutionProcessor {
         return latestPopulation;
     }
 
-    Population createGeneration(Population population) {
+    private Population createGeneration(Population population) {
 
         List<Individual> bestIndividuals = population.getBestIndividuals(this.evolutionChamberProperties.getSelectionSize());
         List<Individual> newIndividuals = bestIndividuals.stream()
@@ -46,8 +46,8 @@ public class EvolutionProcessor {
         population.addIndividuals(newIndividuals);
 
         Map<Individual, Double> currentlyBestIndividuals = population.getBestIndividualsWithFitness(1);
-        LOGGER.debug("Best individual: " + currentlyBestIndividuals.keySet().stream().findFirst().get() + ", "
-                + "Fitness: " + currentlyBestIndividuals.values().stream().findFirst().get());
+        LOGGER.debug("Best individual: " + currentlyBestIndividuals.keySet().stream().findFirst() + ", "
+                + "Fitness: " + currentlyBestIndividuals.values().stream().findFirst());
 
         return population.removeWorstIndividuals(this.evolutionChamberProperties.getSelectionSize());
     }

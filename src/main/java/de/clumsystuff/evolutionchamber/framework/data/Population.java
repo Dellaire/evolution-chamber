@@ -1,6 +1,4 @@
-package de.clumsystuff.evolutionchamber.data;
-
-import org.apache.logging.log4j.util.PropertySource;
+package de.clumsystuff.evolutionchamber.framework.data;
 
 import java.util.ArrayList;
 import java.util.Comparator;
