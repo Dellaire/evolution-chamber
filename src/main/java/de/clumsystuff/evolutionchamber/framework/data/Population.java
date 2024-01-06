@@ -15,7 +15,7 @@ public class Population {
     public Population(List<Individual> individuals, FitnessFunction fitnessFunction) {
 
         this.fitnessFunction = fitnessFunction;
-        this.comparator = Comparator.comparing(o -> o.getFitness(fitnessFunction));
+        this.comparator = Comparator.comparing(fitnessFunction::getFitness);
         this.addIndividuals(individuals);
     }
 
@@ -43,8 +43,7 @@ public class Population {
 
         List<Individual> bestIndividuals = this.getBestIndividuals(numberOfIndividuals);
 
-        return bestIndividuals.stream()
-                .collect(Collectors.toMap(individual -> individual, individual -> individual.getFitness(this.fitnessFunction)));
+        return bestIndividuals.stream().collect(Collectors.toMap(individual -> individual, this.fitnessFunction::getFitness));
     }
 
     public List<Individual> getWorstIndividuals(int numberOfIndividuals) {

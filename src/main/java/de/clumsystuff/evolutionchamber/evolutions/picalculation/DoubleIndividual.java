@@ -16,12 +16,6 @@ public class DoubleIndividual implements Individual {
     private double value;
 
     @Override
-    public Double getFitness(FitnessFunction fitnessFunction) {
-
-        return fitnessFunction.getFitness(this);
-    }
-
-    @Override
     public Individual mutate() {
 
         return new DoubleIndividual().setValue(this.value + RandomHelper.RANDOM.nextDouble() - 0.5);
