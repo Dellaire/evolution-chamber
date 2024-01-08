@@ -1,22 +1,46 @@
 package de.clumsystuff.evolutionchamber.evolutions.evennumberdetection;
 
-import de.clumsystuff.evolutionchamber.framework.data.Individual;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class Neuron implements Individual {
+public class Neuron {
 
-    private Map<Neuron, Double> neuralLinks;
+    private Map<Neuron, Double> neuralLinks = new HashMap<>();
     private Double activation;
     private Double activationThreshold;
 
-    @Override
-    public Individual mutate() {
-        return null;
+    public List<Neuron> getLinkedNeurons() {
+
+        List<Neuron> linkedNeurons = new ArrayList<>();
+        linkedNeurons.add(this);
+        this.neuralLinks.keySet().forEach(neuron -> linkedNeurons.addAll(neuron.getLinkedNeurons()));
+
+        return linkedNeurons;
     }
 
-    @Override
-    public Individual crossover(Individual individual) {
-        return null;
+    public Map<Neuron, Double> getNeuralLinks() {
+        return neuralLinks;
+    }
+
+    public void setNeuralLinks(Map<Neuron, Double> neuralLinks) {
+        this.neuralLinks = neuralLinks;
+    }
+
+    public Double getActivation() {
+        return activation;
+    }
+
+    public void setActivation(Double activation) {
+        this.activation = activation;
+    }
+
+    public Double getActivationThreshold() {
+        return activationThreshold;
+    }
+
+    public void setActivationThreshold(Double activationThreshold) {
+        this.activationThreshold = activationThreshold;
     }
 }

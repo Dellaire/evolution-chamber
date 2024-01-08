@@ -1,0 +1,11 @@
+{
+  "id": "1",
+  "networkId": "n1",
+  "activationThreshold": 0.0,
+  "neuralLinks": [
+    {
+      "id": "3",
+      "weight": 0.0
+    }
+  ]
+}
