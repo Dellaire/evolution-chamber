@@ -8,11 +8,10 @@ import java.util.List;
 public class NeuralNetworkMapper {
 
     public List<NeuronEntity> mapToEntities(NeuralNetwork neuralNetwork) {
-
-
+        return null;
     }
 
     public NeuralNetwork mapToNeuralNetwork(List<NeuronEntity> neuronEntities) {
-
+        return null;
     }
 }

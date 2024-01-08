@@ -12,9 +12,6 @@ import java.util.Map;
 public class EvenNumberDetector implements CommandLineRunner {
 
     @Autowired
-    private NeuralNetworkMapper neuralNetworkMapper;
-
-    @Autowired
     private NeuralNetworkRepository neuralNetworkRepository;
 
     @Autowired
@@ -24,19 +21,24 @@ public class EvenNumberDetector implements CommandLineRunner {
     public void run(String... args) {
 
         Neuron neuron6 = new Neuron();
-        neuron6.setNeuralLinks(Map.of());
 
         Neuron neuron3 = new Neuron();
-        neuron3.setNeuralLinks(Map.of(neuron6, 1.0));
+        neuron3.setNeuralLinks(List.of(new NeuralLink().setNeuron(neuron6).setTransmissionValue(1.0)));
         Neuron neuron4 = new Neuron();
-        neuron4.setNeuralLinks(Map.of(neuron6, 1.0));
+        neuron4.setNeuralLinks(List.of(new NeuralLink().setNeuron(neuron6).setTransmissionValue(1.0)));
         Neuron neuron5 = new Neuron();
-        neuron5.setNeuralLinks(Map.of(neuron6, 1.0));
+        neuron5.setNeuralLinks(List.of(new NeuralLink().setNeuron(neuron6).setTransmissionValue(1.0)));
 
         Neuron neuron1 = new Neuron();
-        neuron1.setNeuralLinks(Map.of(neuron3, 1.0, neuron4, 1.0, neuron5, 1.0));
+        neuron1.setNeuralLinks(List.of(
+                new NeuralLink().setNeuron(neuron3).setTransmissionValue(1.0),
+                new NeuralLink().setNeuron(neuron4).setTransmissionValue(1.0),
+                new NeuralLink().setNeuron(neuron5).setTransmissionValue(1.0)));
         Neuron neuron2 = new Neuron();
-        neuron2.setNeuralLinks(Map.of(neuron3, 1.0, neuron4, 1.0, neuron5, 1.0));
+        neuron2.setNeuralLinks(List.of(
+                new NeuralLink().setNeuron(neuron3).setTransmissionValue(1.0),
+                new NeuralLink().setNeuron(neuron4).setTransmissionValue(1.0),
+                new NeuralLink().setNeuron(neuron5).setTransmissionValue(1.0)));
 
         List<Neuron> inputLayer = List.of(neuron1, neuron2);
         List<Neuron> outputLayer = List.of(neuron6);
@@ -45,6 +47,7 @@ public class EvenNumberDetector implements CommandLineRunner {
                 .setInputLayer(inputLayer)
                 .setOutputLayer(outputLayer);
 
-        this.neuralNetworkRepository.saveAll(this.neuralNetworkMapper.mapToEntities(neuralNetwork));
+        this.neuralNetworkRepository.deleteAll();
+        this.neuralNetworkRepository.save(neuralNetwork);
     }
 }

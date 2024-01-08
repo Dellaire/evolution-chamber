@@ -1,32 +1,22 @@
 package de.clumsystuff.evolutionchamber.evolutions.evennumberdetection;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Neuron {
 
-    private Map<Neuron, Double> neuralLinks = new HashMap<>();
     private Double activation;
     private Double activationThreshold;
+    private List<NeuralLink> neuralLinks = new ArrayList<>();
 
-    public List<Neuron> getLinkedNeurons() {
+    /*public List<Neuron> getLinkedNeurons() {
 
         List<Neuron> linkedNeurons = new ArrayList<>();
         linkedNeurons.add(this);
         this.neuralLinks.keySet().forEach(neuron -> linkedNeurons.addAll(neuron.getLinkedNeurons()));
 
         return linkedNeurons;
-    }
-
-    public Map<Neuron, Double> getNeuralLinks() {
-        return neuralLinks;
-    }
-
-    public void setNeuralLinks(Map<Neuron, Double> neuralLinks) {
-        this.neuralLinks = neuralLinks;
-    }
+    }*/
 
     public Double getActivation() {
         return activation;
@@ -42,5 +32,13 @@ public class Neuron {
 
     public void setActivationThreshold(Double activationThreshold) {
         this.activationThreshold = activationThreshold;
+    }
+
+    public List<NeuralLink> getNeuralLinks() {
+        return neuralLinks;
+    }
+
+    public void setNeuralLinks(List<NeuralLink> neuralLinks) {
+        this.neuralLinks = neuralLinks;
     }
 }

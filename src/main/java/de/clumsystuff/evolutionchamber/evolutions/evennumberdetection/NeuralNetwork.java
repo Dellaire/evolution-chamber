@@ -1,10 +1,14 @@
 package de.clumsystuff.evolutionchamber.evolutions.evennumberdetection;
 
 import de.clumsystuff.evolutionchamber.framework.data.Individual;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Document
+@TypeAlias("NeuralNetwork")
 public class NeuralNetwork implements Individual {
 
     private String id;
