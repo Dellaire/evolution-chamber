@@ -17,8 +17,8 @@ public class NeuronEntity {
     private String id;
 
     private String networkId;
-    private Double activation;
-    private Double activationThreshold;
+    private Double activation = 0.0;
+    private Double activationThreshold = 1.0;
     private List<NeuralLink> neuralLinks = new ArrayList<>();
 
     public String getId() {

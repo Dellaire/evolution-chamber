@@ -2,7 +2,7 @@ package de.clumsystuff.evolutionchamber.evolutions.evennumberdetection;
 
 public class NeuralLink {
 
-    private Double transmissionValue;
+    private Double transmissionValue = 0.0;
     private Neuron neuron;
 
     public Double getTransmissionValue() {
