@@ -50,6 +50,9 @@ public class EvenNumberDetector implements CommandLineRunner {
 
         neuralNetwork.apply(List.of(1.0, 1.0));
 
+        this.neuralNetworkRepository.deleteAll();
+        this.neuralNetworkRepository.save(neuralNetwork);
+
         System.out.println(neuralNetwork.evaluate());
     }
 }

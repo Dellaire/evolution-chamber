@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {
         "de.clumsystuff.evolutionchamber.framework",
-        "de.clumsystuff.evolutionchamber.evolutions.imagerecognition"})
-public class ImageRecognitionApplication {
+        "de.clumsystuff.evolutionchamber.evolutions.evennumberdetection"})
+public class EvenNumberDetectionApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ImageRecognitionApplication.class, args);
+        SpringApplication.run(EvenNumberDetectionApplication.class, args);
     }
 }
