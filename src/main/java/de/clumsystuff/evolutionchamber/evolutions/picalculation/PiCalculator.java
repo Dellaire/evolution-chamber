@@ -1,8 +1,8 @@
 package de.clumsystuff.evolutionchamber.evolutions.picalculation;
 
-import de.clumsystuff.evolutionchamber.framework.data.FitnessFunction;
-import de.clumsystuff.evolutionchamber.framework.data.Individual;
-import de.clumsystuff.evolutionchamber.framework.data.Population;
+import de.clumsystuff.evolutionchamber.framework.data.core.FitnessFunction;
+import de.clumsystuff.evolutionchamber.framework.data.core.Individual;
+import de.clumsystuff.evolutionchamber.framework.data.core.Population;
 import de.clumsystuff.evolutionchamber.framework.processing.EvolutionProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

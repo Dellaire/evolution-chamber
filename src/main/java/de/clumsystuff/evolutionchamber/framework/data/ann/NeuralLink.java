@@ -1,4 +1,4 @@
-package de.clumsystuff.evolutionchamber.evolutions.evennumberdetection;
+package de.clumsystuff.evolutionchamber.framework.data.ann;
 
 public class NeuralLink {
 

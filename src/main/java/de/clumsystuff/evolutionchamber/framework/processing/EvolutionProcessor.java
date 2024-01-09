@@ -1,8 +1,8 @@
 package de.clumsystuff.evolutionchamber.framework.processing;
 
 import de.clumsystuff.evolutionchamber.framework.configuration.EvolutionChamberProperties;
-import de.clumsystuff.evolutionchamber.framework.data.Individual;
-import de.clumsystuff.evolutionchamber.framework.data.Population;
+import de.clumsystuff.evolutionchamber.framework.data.core.Individual;
+import de.clumsystuff.evolutionchamber.framework.data.core.Population;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

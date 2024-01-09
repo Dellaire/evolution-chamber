@@ -1,4 +1,4 @@
-package de.clumsystuff.evolutionchamber.framework.data;
+package de.clumsystuff.evolutionchamber.framework.data.core;
 
 import java.util.ArrayList;
 import java.util.Comparator;

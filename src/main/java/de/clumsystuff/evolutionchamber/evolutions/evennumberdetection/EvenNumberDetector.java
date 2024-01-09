@@ -1,12 +1,13 @@
 package de.clumsystuff.evolutionchamber.evolutions.evennumberdetection;
 
+import de.clumsystuff.evolutionchamber.framework.data.ann.NeuralLink;
+import de.clumsystuff.evolutionchamber.framework.data.ann.Neuron;
 import de.clumsystuff.evolutionchamber.framework.processing.EvolutionProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class EvenNumberDetector implements CommandLineRunner {
@@ -44,9 +45,9 @@ public class EvenNumberDetector implements CommandLineRunner {
         List<Neuron> inputLayer = List.of(neuron1, neuron2);
         List<Neuron> outputLayer = List.of(neuron6);
 
-        NeuralNetwork neuralNetwork = new NeuralNetwork()
-                .setInputLayer(inputLayer)
-                .setOutputLayer(outputLayer);
+        NeuralNetworkEntity neuralNetwork = new NeuralNetworkEntity();
+        neuralNetwork.setInputLayer(inputLayer);
+        neuralNetwork.setOutputLayer(outputLayer);
 
         neuralNetwork.apply(List.of(1.0, 1.0));
 

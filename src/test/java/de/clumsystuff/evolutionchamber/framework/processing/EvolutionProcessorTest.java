@@ -1,7 +1,7 @@
 package de.clumsystuff.evolutionchamber.framework.processing;
 
 import de.clumsystuff.evolutionchamber.framework.configuration.EvolutionChamberProperties;
-import de.clumsystuff.evolutionchamber.framework.data.Population;
+import de.clumsystuff.evolutionchamber.framework.data.core.Population;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
