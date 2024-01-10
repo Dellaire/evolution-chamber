@@ -17,7 +17,7 @@ public class DoubleIndividual implements Individual {
     @Override
     public Individual mutate() {
 
-        return new DoubleIndividual().setValue(this.value + RandomHelper.RANDOM.nextDouble() - 0.5);
+        return this.setValue(this.value + RandomHelper.RANDOM.nextDouble() - 0.5);
     }
 
     @Override

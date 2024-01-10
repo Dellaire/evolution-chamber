@@ -16,12 +16,41 @@ public class NeuralNetwork implements Individual {
 
     @Override
     public Individual mutate() {
-        return null;
+
+        for (Neuron neuron : this.getAllNeurons()) {
+            neuron.mutate();
+        }
+
+        return this;
     }
 
     @Override
     public Individual crossover(Individual individual) {
-        return null;
+
+        NeuralNetwork otherNeuralNetwork = (NeuralNetwork) individual;
+        List<Neuron> otherNeurons = otherNeuralNetwork.getAllNeurons();
+        List<Neuron> neurons = this.getAllNeurons();
+
+        if (neurons.size() != otherNeurons.size()) {
+            throw new RuntimeException("Crossovers between neural networks are only allowed when the numbers of neurons are identical.");
+        }
+
+        List<Neuron> childInputLayer = new ArrayList<>();
+        List<Neuron> childOutputLayer = new ArrayList<>();
+        for (int i = 0; i < neurons.size(); i++) {
+
+            Neuron childNeuron = neurons.get(i).crossover(otherNeurons.get(i));
+            if (this.inputLayer.contains(neurons.get(i))) {
+                childInputLayer.add(childNeuron);
+            }
+            if (this.outputLayer.contains(neurons.get(i))) {
+                childOutputLayer.add(childNeuron);
+            }
+        }
+
+        return new NeuralNetwork()
+                .setInputLayer(childInputLayer)
+                .setOutputLayer(childOutputLayer);
     }
 
     public void apply(List<Double> inputVector) {
@@ -34,16 +63,20 @@ public class NeuralNetwork implements Individual {
             this.inputLayer.get(i).setActivation(inputVector.get(i));
         }
 
-        List<Neuron> allNeurons = this.inputLayer.stream()
+        List<Neuron> allNeurons = this.getAllNeurons();
+        for (Neuron neuron : allNeurons) {
+            neuron.activate();
+        }
+    }
+
+    public List<Neuron> getAllNeurons() {
+
+        return this.inputLayer.stream()
                 .map(Neuron::getLinkedNeurons)
                 .flatMap(Collection::stream)
                 .distinct()
                 .sorted(Comparator.comparing(Neuron::getLayer))
                 .toList();
-
-        for (Neuron neuron : allNeurons) {
-            neuron.activate();
-        }
     }
 
     public List<Double> evaluate() {
