@@ -16,7 +16,7 @@ public class NeuralLink {
 
         return new NeuralLink()
                 .setTransmissionValue((this.transmissionValue + neuralLink.getTransmissionValue()) / 2)
-                .setNeuron();
+                .setNeuron(this.getNeuron().crossover(neuralLink.getNeuron()));
     }
 
     public Double getTransmissionValue() {

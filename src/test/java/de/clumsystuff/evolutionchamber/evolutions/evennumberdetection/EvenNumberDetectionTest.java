@@ -3,24 +3,34 @@ package de.clumsystuff.evolutionchamber.evolutions.evennumberdetection;
 import de.clumsystuff.evolutionchamber.framework.data.ann.NeuralLink;
 import de.clumsystuff.evolutionchamber.framework.data.ann.NeuralNetwork;
 import de.clumsystuff.evolutionchamber.framework.data.ann.Neuron;
-import de.clumsystuff.evolutionchamber.framework.processing.EvolutionProcessor;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-//@Component
-public class EvenNumberDetector implements CommandLineRunner {
+@SpringBootTest
+public class EvenNumberDetectionTest {
 
     @Autowired
     private NeuralNetworkRepository neuralNetworkRepository;
 
-    @Autowired
-    private EvolutionProcessor evolutionProcessor;
+    @Test
+    public void detectEvenNumber() {
 
-    @Override
-    public void run(String... args) {
+        NeuralNetwork neuralNetwork1 = this.createNeuralNetwork();
+        NeuralNetwork neuralNetwork2 = this.createNeuralNetwork();
+        neuralNetwork2.mutate();
+
+        NeuralNetwork childNeuralNetwork = (NeuralNetwork) neuralNetwork1.crossover(neuralNetwork2);
+
+        NeuralNetworkEntity neuralNetworkEntity = new NeuralNetworkEntity(childNeuralNetwork);
+
+        this.neuralNetworkRepository.deleteAll();
+        this.neuralNetworkRepository.save(neuralNetworkEntity);
+    }
+
+    private NeuralNetwork createNeuralNetwork() {
 
         Neuron neuron1 = new Neuron().setId("1");
         Neuron neuron2 = new Neuron().setId("2");
@@ -50,14 +60,6 @@ public class EvenNumberDetector implements CommandLineRunner {
         neuralNetwork.setInputLayer(inputLayer);
         neuralNetwork.setOutputLayer(outputLayer);
 
-        //neuralNetwork.apply(List.of(1.0, 1.0));
-        neuralNetwork.crossover(neuralNetwork);
-
-        NeuralNetworkEntity neuralNetworkEntity = new NeuralNetworkEntity(neuralNetwork);
-
-        this.neuralNetworkRepository.deleteAll();
-        this.neuralNetworkRepository.save(neuralNetworkEntity);
-
-        System.out.println(neuralNetwork.evaluate());
+        return neuralNetwork;
     }
 }
