@@ -6,6 +6,8 @@ public class NeuralLink {
 
     private Double transmissionValue = 0.0;
     private Neuron neuron;
+    private String sourceNeuronId;
+    private String targetNeuronId;
 
     public NeuralLink mutate() {
 
@@ -16,7 +18,8 @@ public class NeuralLink {
 
         return new NeuralLink()
                 .setTransmissionValue((this.transmissionValue + neuralLink.getTransmissionValue()) / 2)
-                .setNeuron(this.getNeuron().crossover(neuralLink.getNeuron()));
+                .setSourceNeuronId(this.sourceNeuronId)
+                .setTargetNeuronId(this.targetNeuronId);
     }
 
     public Double getTransmissionValue() {
@@ -34,6 +37,24 @@ public class NeuralLink {
 
     public NeuralLink setNeuron(Neuron neuron) {
         this.neuron = neuron;
+        return this;
+    }
+
+    public String getSourceNeuronId() {
+        return sourceNeuronId;
+    }
+
+    public NeuralLink setSourceNeuronId(String sourceNeuronId) {
+        this.sourceNeuronId = sourceNeuronId;
+        return this;
+    }
+
+    public String getTargetNeuronId() {
+        return targetNeuronId;
+    }
+
+    public NeuralLink setTargetNeuronId(String targetNeuronId) {
+        this.targetNeuronId = targetNeuronId;
         return this;
     }
 }

@@ -1,7 +1,6 @@
 package de.clumsystuff.evolutionchamber.framework.data.ann;
 
 import de.clumsystuff.evolutionchamber.evolutions.picalculation.RandomHelper;
-import de.clumsystuff.evolutionchamber.framework.data.core.Individual;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,12 +15,13 @@ public class Neuron {
     private Integer layer = 0;
     private List<NeuralLink> neuralLinks = new ArrayList<>();
 
+    public Neuron(String id) {
+        this.id = id;
+    }
+
     public Neuron mutate() {
 
         this.setActivationThreshold(this.activationThreshold + RandomHelper.RANDOM.nextDouble() - 0.5);
-        for (NeuralLink neuralLink : this.neuralLinks) {
-            neuralLink.mutate();
-        }
 
         return this;
     }
@@ -32,14 +32,8 @@ public class Neuron {
             throw new RuntimeException("Crossovers between neurons are only allowed when the numbers of neural links are identical.");
         }
 
-        List<NeuralLink> childNeuralLinks = new ArrayList<>();
-        for (int i = 0; i < this.neuralLinks.size(); i++) {
-            childNeuralLinks.add(this.neuralLinks.get(i).crossover(neuron.getNeuralLinks().get(i)));
-        }
-
-        return new Neuron()
+        return new Neuron(this.id)
                 .setActivationThreshold((this.activationThreshold + neuron.getActivationThreshold()) / 2)
-                .setNeuralLinks(childNeuralLinks)
                 .setLayer(this.layer);
     }
 
@@ -55,6 +49,17 @@ public class Neuron {
         return linkedNeurons;
     }
 
+    public Set<NeuralLink> getLinkedNeuralLinks() {
+
+        Set<NeuralLink> linkedNeuralLinks = new HashSet<>(this.neuralLinks);
+
+        this.neuralLinks.stream()
+                .map(NeuralLink::getNeuron)
+                .forEach(neuron -> linkedNeuralLinks.addAll(neuron.getLinkedNeuralLinks()));
+
+        return linkedNeuralLinks;
+    }
+
     public void activate() {
 
         if (this.activation >= this.activationThreshold) {
@@ -66,11 +71,6 @@ public class Neuron {
 
     public String getId() {
         return id;
-    }
-
-    public Neuron setId(String id) {
-        this.id = id;
-        return this;
     }
 
     public Double getActivation() {
@@ -107,12 +107,17 @@ public class Neuron {
         return neuralLinks;
     }
 
-    public Neuron setNeuralLinks(List<NeuralLink> neuralLinks) {
+    public Neuron linkToNeuron(Neuron neuron, Double transmissionValue) {
 
-        for (NeuralLink neuralLink : neuralLinks) {
-            neuralLink.getNeuron().setLayer(this.layer + 1);
-        }
-        this.neuralLinks = neuralLinks;
+        NeuralLink neuralLink = new NeuralLink()
+                .setTransmissionValue(transmissionValue)
+                .setNeuron(neuron)
+                .setSourceNeuronId(this.id)
+                .setTargetNeuronId(neuron.getId());
+
+        neuron.setLayer(this.layer + 1);
+
+        this.neuralLinks.add(neuralLink);
 
         return this;
     }
